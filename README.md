@@ -1,1 +1,3 @@
-# data_warehouse_DE23_simon_troedsson
+# datawarehoue lifecycle course
+
+I learn datawarehouse here
