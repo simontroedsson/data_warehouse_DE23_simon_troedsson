@@ -1,0 +1,200 @@
+Go into marketplace under data products in snowsight. Search and get the following dataset Google Keywords search dataset - discover all searches on Google.
+
+Now create a worksheet on your local repository and start querying this data through snowsql.
+
+  a) Use this database and find out the underlying schemas, tables and views to get an overview of its logical structure.
+
+  b) Find out the columns and its data types in the table GOOGLE_KEYWORDS.
+
+GOOGLE_KEYWORDS:
+    country TEXT
+    keyword TEXT
+    site TEXT
+    year TEXT
+    month TEXT
+    day TEXT
+    platform TEXT
+    referral_type TEXT
+    clean_landingpage TEXT
+    calibrated_users REAL
+    calibrated_clicks REAL
+    is_branded_keyword FIXED
+    is_question TEXT
+    date TEXT
+
+
+We will now do some exploratory data analysis (EDA) of this dataset.
+
+  c) Find out number of rows in the dataset.
+    35046855
+  d) When is the first search and when is the latest search in the dataset?
+    22-06-01 first search
+    22-06-30 latest search
+  e) Which are the 10 most popular keywords?
+   KEYWORD	     N_SEARCHES
+   gmail	     36381
+   youtube	     26847
+   facebook	     22003
+   google	     17809
+   amazon	     14953
+   Google drive	 14085
+   canva	     13881
+   instagram     13334
+   netflix	     13068
+   roblox	     12260
+
+  f) How many unique keywords are there?
+  7263686
+
+  g) Check what type of platforms are used and how many users per platform
+  35046855
+  h) Let's dive into what swedish people are searching. Go into worldbanks country codes to find out the country code for Sweden. Find the 20 most popular keywords and the number of searches of that keyword.
+    COUNTRY	KEYWORD	         N_SEARCHES
+    752	    gmail	         403
+    752	    1177	         243
+    752	    länsförsäkringar 243
+    752	    youtube	         243
+    752	    google drive	 220
+    752	    porn	         204
+    752	    facebook	     190
+    752	    youtube to mp3	 188
+    752	    google	         174
+    752	    spotify	         170
+    752	    foodora	         165
+    752	    hotmail	         161
+    752	    disney plus	     154
+    752	    hbo	             154
+    752	    google translate 152
+    752	    translate	     151
+    752	    postnord	     151
+    752	    netflix	         149
+    752	    sas	             144
+    752	    outlook	         143
+  i) Lets see how popular spotify is around the world. List the top 10 number countries and the number of searches for spotify. For now it's okay to list the country codes, later we'll join this with the actual country to get more useful information to the stakeholders.
+    COUNTRY	KEYWORD	N_SEARCHES
+    840	    spotify	537
+    356	    spotify	333
+    276	    spotify	308
+    124	    spotify	307
+    392	    spotify	277
+    826	    spotify	269
+    250	    spotify	255
+    36	    spotify	230
+    76	    spotify	229
+    56	    spotify	225
+  j) Feel free to do additional explorations of this dataset.
+
+1. How much does it cost?
+For these exercises, look up the credit cost for your snowflake edition, cloud provider and region for your snowflake account.
+  
+  price/credit = 3.90 $
+  a) You have a simple workload that runs daily in Snowflake. The workload uses 0.5 credits per day. Calculate the total credit usage and cost for a 30-day month.
+   
+    number_of_credits_used * price/credit = cost 
+    number_of_credits_used = 30 * 0.5 = 15
+    price/credit = 3.90 $
+    cost = 15 * 3.90 = 58.5$
+  
+  b) Your workload varies throughout the month. 
+  For the first 10 days, you use 2 credits per day. For the next 10 days, you use 1.5 credits per day,
+  and for the last 10 days, you use 1 credit per day. Calculate the total credit usage and cost for a 30-day month.
+ 
+  number_of_credits_used = 10 * 2 + 10 * 1.5 + 10 = 35
+  cost = 35 * 3.90 = 136.5$
+
+  c) You have three different warehouses running workloads simultaneously. 
+  Warehouse A is of size XS, Warehouse B is of size S, and Warehouse C is of size M. 
+  Warehouse A is used for 10h/day, B is used for 2h/day and C is used for 1h/day. 
+  Calculate the total monthly cost assuming each warehouse runs for the full 30-day month.
+  
+  https://docs.snowflake.com/en/user-guide/warehouses-overview
+  XS_credit_per_hour = 1
+  S_credit_per_hour = 2
+  M_credit_per_hour = 4
+
+  warehouse_A_credit_per_day = hours/day * XS_credit_per_hour = 10 * 1 = 10
+  warehouse_A_credit_per_month = warehouse_A_credit_per_day * 30 = 10 * 30 = 300
+
+  warehouse_B_credit_per_day = hours/day * S_credit_per_hour = 2 * 2 = 4
+  warehouse_B_credit_per_month = warehouse_B_credit_per_day * 30 = 4 * 30 = 120
+
+  warehouse_C_credit_per_day = hours/day * M_credit_per_hour = 1 * 4 = 4
+  warehouse_C_credit_per_month = warehouse_C_credit_per_day * 30 = 4 * 30 = 120
+
+  total_monthly_credit = warehouse_A_credit_per_month + warehouse_B_credit_per_month + warehouse_C_credit_per_month = 300 + 120 + 120 = 540
+  total_monthly_cost = total_monthly_credit * price/credit
+  total_monthly_cost = 540 * 3.90 = 2106
+  
+  d) Your Snowflake warehouse uses auto-scaling. For the first 10 days, it operates on 2 clusters for 10 hours per day. 
+  For the next 10 days, it scales up to 3 clusters for 10 hours per day. 
+  For the last 10 days, it scales up to 4 clusters for 10 hours per day. 
+  Calculate the total monthly budget. Assume the warehouse consumes 1 credit per hour per cluster.
+  https://docs.snowflake.com/en/user-guide/warehouses-multicluster
+  10 * 20 + 10 * 30 + 10 * 40 = 900
+  totalcost = 900 * 3.90 = 3510
+
+2. Theory questions
+These study questions are good to get an overview of how snowflake works.
+
+  a) What are the main components of Snowflake's architecture?
+    cloud services, compute layer and storage layer
+
+  b) Explain the role of the storage layer in Snowflake.
+    When data is loaded into Snowflake, Snowflake reorganizes that data into its internal optimized, compressed, columnar format. 
+    Snowflake stores this optimized data in cloud storage.
+    snowflake runs ontop on one of the big cloud platforms Azure, AWS or google cloud.
+
+  c) What is the purpose of the compute layer in Snowflake?
+    to process queries using virtual warehouses. 
+    Each virtual warehouse is an MPP compute cluster composed of multiple compute nodes allocated by Snowflake from a cloud provider.
+  
+  d) How does the cloud services layer enhance the functionality of Snowflake?
+    The cloud services layer is a collection of services that coordinate activities across Snowflake. 
+    These services tie together all of the different components of Snowflake in order to process user requests, from login to query dispatch. 
+    The cloud services layer also runs on compute instances provisioned by Snowflake from the cloud provider.
+    
+    Services managed in this layer include:
+    Authentication
+    Infrastructure management
+    Metadata management
+    Query parsing and optimization
+    Access control
+
+  e) What is a virtual warehouse in Snowflake, and how does it differ from a traditional data warehouse?
+    a virtual warehouse is a cluster of compute resources that are used to process queries and DML operations in snowflake. 
+    a traditonal data warehouse is typically involved in a on-premise architecture.
+
+    Virtual Warehouse (Snowflake) offers a cloud-native, elastic, and cost-efficient solution with minimal management overhead, 
+    making it ideal for modern data workloads, especially in environments requiring high scalability and flexibility.
+
+    Traditional Data Warehouse is often characterized by fixed infrastructure, 
+    higher management requirements, and limited scalability, making it less agile and more costly to maintain and scale.
+
+  f) When are the cases you would want to scale up versus scaling out in terms of virtual warehouses and compute resources.
+    scale up when you need more computing power to handle large complex workloads that arent highly concurrent.
+    scale out when you have many concurrent queries or users.
+
+  g) How does Snowflake's pricing model differ from traditional on-premise data warehousing solutions?
+    it allows for flexibel pricing since you can auto-scale the allocation of computing and storeage resources as needed.
+    you pay for how much computing/storage you use instead of an upfront cost for a fixed amount of computing power and storage.
+
+  h) What is the difference between pay-as-you-go and upfront storage, and when you should you choose one over the other?
+    pay-as-you-go means that you pay for how much storage you use whereas upfront you pay for a fixed amount of storage.
+    its convenient with pay-as-you go model when the amount of storage that you need can vary.
+    upfront storage is better if you need an exact amount of storage that wont change.
+
+  i) Explain the concept of Time Travel and Fail-safe in Snowflake and its use cases
+    Time Travel in Snowflake allows users to access and query historical data as it existed at a specific point in time. 
+    This feature is particularly useful for recovering data that has been accidentally modified or deleted, as well as for auditing purposes
+
+    Usage Examples:
+        Undoing Accidental Data Deletion: If a table was accidentally dropped, you can use Time Travel to restore it.
+        Reverting Unintended Data Modifications: If a data update operation caused unintended changes, you can use Time Travel to revert the table to its previous state.
+        Auditing Data Changes: You can query historical data to see how the data has changed over time, which can be valuable for compliance or auditing purposes.
+
+    Fail-safe in Snowflake is an additional layer of data protection that allows Snowflake to recover historical data beyond the Time Travel retention period. 
+    However, unlike Time Travel, Fail-safe is designed primarily for disaster recovery and is managed by Snowflake rather than directly accessible by users.
+
+    Usage Examples:
+    Data Recovery Beyond Time Travel: If you need to recover data that is older than the Time Travel retention period and falls within the Fail-safe period, you can contact Snowflake Support to assist with recovery.
+    Emergency Situations: Fail-safe is used in emergency situations where data needs to be recovered due to unexpected incidents, such as accidental deletions or data corruption that occurred after the Time Travel window has closed.
