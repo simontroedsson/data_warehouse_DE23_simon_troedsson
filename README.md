@@ -5,7 +5,7 @@ I learn datawarehouse here
 ### Glossary
 | terminology       | explanation |
 | ----------------- | ----------- |
-| downstream        |             |
+| downstream        | downstream refers to the system that recieves data or output from an earlier stage in the pipeline. Downstream elements are dependant on data or results produced by upstream components.             |
 | upstream          |             |
 | data warehouse    |             |
 | cloud computing   |             |
