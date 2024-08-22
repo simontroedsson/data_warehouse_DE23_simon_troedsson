@@ -15,12 +15,36 @@ Now create a worksheet on your local repository and start querying this data thr
 
 &nbsp; b) Find out the columns and its data types in the table `GOOGLE_KEYWORDS`.
 
+GOOGLE_KEYWORDS
+| Column name | datatype |
+| ----------- | -------- |
+| country     | TEXT     |
+| keyword     | TEXT     |
+| site        | TEXT     |
+| year        | TEXT     |
+| month       | TEXT     |
+| day         | TEXT     |
+| platform    | TEXT     |
+| referral_type     | TEXT     |
+| clean_landingpage    | TEXT     |
+| calibrated_users    | REAL     |
+| calibrated_clicks    | REAL     |
+| is_branded_keyword    | FIXED    |
+| is_question     | TEXT     |
+| date    | TEXT     |
+
 We will now do some exploratory data analysis (EDA) of this dataset.
 
 &nbsp; c) Find out number of rows in the dataset.
+ <br />
+ 35046855
 
 &nbsp; d) When is the first search and when is the latest search in the dataset?
-
+<br />
+ 22-06-01 first search 
+<br />
+ 22-06-30 latest search
+ 
 &nbsp; e) Which are the 10 most popular keywords?
 
 &nbsp; f) How many unique keywords are there?
