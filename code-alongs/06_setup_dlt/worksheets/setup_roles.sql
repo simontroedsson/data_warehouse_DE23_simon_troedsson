@@ -2,8 +2,6 @@ USE ROLE USERADMIN;
  
 CREATE ROLE IF NOT EXISTS movies_dlt_role;
 
-
-
 USE ROLE SECURITYADMIN;
 
 -- can have different ingestions tools e.g. dlt, airbyte, fivetran, ...

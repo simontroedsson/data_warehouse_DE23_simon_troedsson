@@ -34,7 +34,8 @@ GRANT CREATE TABLE ON SCHEMA ice_cream_db.public TO ROLE ice_cream_writer;
 
 GRANT ROLE ice_cream_writer TO USER simontroedsson;
 
-USE ROLE ice_cream_writer;
+
+
 
 
 

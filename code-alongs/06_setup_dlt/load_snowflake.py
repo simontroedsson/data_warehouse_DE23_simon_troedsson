@@ -4,9 +4,10 @@ from pathlib import Path
 import os
 import pprint
 
+
 @dlt.resource(write_disposition="append")
 def load_snowflake_resource(file_path: str, **kwargs):
-    df = pd.read_csv("NetflixOriginals.csv", **kwargs)
+    df = pd.read_csv(file_path, **kwargs)
     yield df.to_dict(orient="records")
 
 if __name__ == "__main__":
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     pprint.pprint(data)
 
     # run the pipeline with your parameters
-    load_info = pipeline.run(data, table_name="netflix")
+    #load_info = pipeline.run(data, table_name="netflix")
 
     # pretty print the information on data that was loaded
-    print(load_info)
+    #print(load_info)
