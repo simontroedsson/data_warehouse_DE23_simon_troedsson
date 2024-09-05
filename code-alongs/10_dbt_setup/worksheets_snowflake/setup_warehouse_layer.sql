@@ -40,3 +40,4 @@ CREATE TABLE test (id INTEGER);
 SHOW TABLES;
 DROP TABLE TEST;
 
+USE ROLE job_ads_dbt_role;
